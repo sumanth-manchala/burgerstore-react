@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import Aux from '../../hoc/Aux';
 import Burger from '../Burger/Burger';
 import BuildControls from '../Burger/BuildControls/BuildControls';
+import Modal from '../../UI/Modal/Modal';
+import OrderSummary from '../Burger/OrderSummary/OrderSummary';
+import Backdrop from '../../UI/Backdrop/Backdrop';
 
 
 const INGREDIENT_PRICES = {
@@ -20,6 +23,7 @@ class BurgerBuilder extends Component{
             meat:0
         },
         purchasable: false,
+        orderClicked: false,
         totalPrice: 4
     }
 
@@ -67,6 +71,21 @@ class BurgerBuilder extends Component{
         this.updatePurchaseState(newIngredients);
     }
 
+    orderHandler = () => {
+        this.setState({
+            orderClicked: true
+        });
+    }
+
+    orderCancelHandler = () => {
+        this.setState({
+            orderClicked: false
+        });
+    }
+    
+    orderContinueHandler = () => {
+        alert('Order Placed');
+    }
     render(){
         const disabledInfo = {...this.state.ingredients};
         for(let key in disabledInfo)
@@ -75,13 +94,21 @@ class BurgerBuilder extends Component{
         }
         return(
             <Aux>
+                <Modal show={this.state.orderClicked} modalClose={this.orderCancelHandler}>
+                    <OrderSummary 
+                        ingredients={this.state.ingredients}
+                        price={this.state.totalPrice}
+                        continueHandler={this.orderContinueHandler}
+                        cancelHandler={this.orderCancelHandler}/>
+                </Modal>
                 <Burger ingredients={this.state.ingredients}/>
                 <BuildControls 
                     addHandler={this.addIngredientHandler} 
                     removeHandler={this.removeIngredientHandler} 
                     disabledInfo={disabledInfo} 
                     price={this.state.totalPrice}
-                    purchasable={this.state.purchasable} />
+                    purchasable={this.state.purchasable}
+                    orderHandler={this.orderHandler}/>
             </Aux>
         );
     }
