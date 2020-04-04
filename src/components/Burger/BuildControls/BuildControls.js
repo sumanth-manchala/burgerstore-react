@@ -22,6 +22,7 @@ const buildControls = (props) => {
                     lessHandler={()=> props.removeHandler(ctrl.type)}
                     disable={props.disabledInfo[ctrl.type]} /> 
             ))}
+            <button className={classes.OrderButton} disabled={!props.purchasable}>ORDER NOW!</button>
         </div>
     );
 
