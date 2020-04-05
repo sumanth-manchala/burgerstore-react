@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Aux from '../../hoc/Aux';
 import classes from './Layout.module.css';
-import Toolbar from '../Navigation/Toolbar/Toolbar';
-import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
+import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
+import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 
 class Layout extends Component{
 
@@ -20,8 +20,7 @@ class Layout extends Component{
     SideDrawerToggleHandler = () => {
         this.setState( (prevState) => ({
             showSideDrawer: !prevState.showSideDrawer
-        })
-        );
+        }));
     }
     render(){
         return(
