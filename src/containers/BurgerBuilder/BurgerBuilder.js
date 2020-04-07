@@ -9,6 +9,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrroHandler';
 import burgerIngredient from '../../components/Burger/BurgerIngredient/BurgerIngredient';
 import Checkout from '../Checkout/Checkout';
+import { Route, withRouter } from 'react-router-dom';
 
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -113,6 +114,7 @@ class BurgerBuilder extends Component{
         .then(response => {
             this.setState({loading: false, orderClicked: false});
             console.log(response);
+            this.props.history.push('/checkout');
         })
         .catch(error => {
             this.setState({loading: false, orderClicked: false});
@@ -161,7 +163,6 @@ class BurgerBuilder extends Component{
                     {orderSummary}
                 </Modal>
                 {burger}
-                <Checkout />
             </Aux>
         );
     }
