@@ -21,8 +21,8 @@ const withErrorHandler = (WrappedComponent, axios) => {
 
         componentWillUnmount() {  //To prevent duplicate interceptors
 
-            axios.interceptors.eject(this.reqInterceptor);
-            axios.interceptors.eject(this.resInterceptor);
+            axios.interceptors.request.eject(this.reqInterceptor);
+            axios.interceptors.response.eject(this.resInterceptor);
         }
 
         
