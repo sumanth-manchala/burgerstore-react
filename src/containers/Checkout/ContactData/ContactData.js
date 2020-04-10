@@ -6,6 +6,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import { withRouter } from 'react-router-dom';
 import Input from '../../../components/UI/Input/Input';
 import input from '../../../components/UI/Input/Input';
+import { connect } from 'react-redux';
 
 class ContactData extends Component {
 
@@ -102,7 +103,7 @@ class ContactData extends Component {
         }
 
         if(rules.minLength){
-            isValid = value.length > rules.minLength && isValid;
+            isValid = value.length >= rules.minLength && isValid;
         }
 
         if(rules.maxLength){
@@ -140,7 +141,7 @@ class ContactData extends Component {
             formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
         }
         const order = {
-            ingredients: this.props.ingredients,
+            ingredients: this.props.ings,
             price: this.props.price,
             orderdata: formData
         };
@@ -196,4 +197,10 @@ class ContactData extends Component {
 
 }
 
-export default withRouter(ContactData);
+const mapStateToProps = state => {
+    return {
+        ings: state.ingredients,
+        price: state.totalPrice
+    }
+};
+export default connect(mapStateToProps)(withRouter(ContactData));
