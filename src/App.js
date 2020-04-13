@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+
 import Layout from './containers/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -6,9 +7,14 @@ import Checkout from './containers/Checkout/Checkout';
 import Orders from './containers/Orders/Orders';
 import Auth from './containers/Auth/Auth';
 import Logout from './containers/Auth/Logout/Logout';
-
+import * as actions from './store/actions/index';
+import { connect } from 'react-redux';
 
 class App extends Component{
+
+  componentDidMount(){
+    this.props.authCheckState();
+  }
 
   render(){
     return(
@@ -26,5 +32,10 @@ class App extends Component{
     );
   }
 }
+const mapDispatchToProps = dispatch => {
+  return {
+    authCheckState: () => dispatch(actions.authCheckState())
+  }
+}
 
-export default App;
+export default connect(null, mapDispatchToProps)(App);
