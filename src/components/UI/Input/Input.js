@@ -1,6 +1,5 @@
 import React from 'react';
 import classes from './Input.module.css';
-import { checkPropTypes } from 'prop-types';
 
 const input = (props) => {
     let inputElement = null;
