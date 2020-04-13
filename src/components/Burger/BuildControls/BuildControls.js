@@ -23,7 +23,10 @@ const buildControls = (props) => {
                     lessHandler={()=> props.removeHandler(ctrl.type)}
                     disable={props.disabledInfo[ctrl.type]} /> 
             ))}
-            <button className={classes.OrderButton} onClick={props.orderHandler} disabled={!props.purchasable}>ORDER NOW!</button>
+            <button 
+                className={classes.OrderButton} 
+                onClick={props.orderHandler} 
+                disabled={!props.purchasable}> {props.isAuth ? 'ORDER NOW!' : 'SIGNUP TO ORDER' }</button>
         </div>
     );
 

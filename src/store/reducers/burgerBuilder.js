@@ -3,7 +3,8 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     ingredients: null,
     totalPrice: 4,
-    error: false
+    error: false,
+    building: false
 }
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -18,6 +19,7 @@ const reducer = (state = initialState, action) => {
             console.log("ADD Ingredient called ",action.ingredientName);
             return {
                 ...state,
+                building: true,
                 ingredients: {
                     ...state.ingredients,
                     [action.ingredientName]: state.ingredients[action.ingredientName] + 1
@@ -28,6 +30,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.REMOVE_INGREDIENT:
             return {
                 ...state,
+                building: true,
                 ingredients: {
                     ...state.ingredients,
                     [action.ingredientName]: state.ingredients[action.ingredientName] - 1
@@ -40,6 +43,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 ingredients: action.ingredients,
                 totalPrice: 4,
+                building: false,
                 error: false //To handle loading ingredients after gettin failed 
             };
 
